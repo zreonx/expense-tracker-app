@@ -39,7 +39,7 @@ const userResolver = {
       }
     },
 
-    login: async (_, { inputs }, context) => {
+    login: async (_, { input }, context) => {
       try {
         const { username, password } = input;
 
