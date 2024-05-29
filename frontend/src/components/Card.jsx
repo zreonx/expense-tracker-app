@@ -17,7 +17,7 @@ const categoryColorMap = {
   // Add more categories and corresponding color classes as needed
 };
 
-const Card = ({ transaction }) => {
+const Card = ({ transaction, authUser }) => {
   let { category, amount, location, date, paymentType, description } =
     transaction;
   const cardClass = categoryColorMap[category];
@@ -25,7 +25,7 @@ const Card = ({ transaction }) => {
   const [deleteTransaction, { loading, error }] = useMutation(
     DELETE_TRANSACTION,
     {
-      refetchQueries: ["GetTransactions"],
+      refetchQueries: ["GetTransactions", "GetTransactionStatistics"],
     }
   );
 
@@ -82,7 +82,7 @@ const Card = ({ transaction }) => {
             {format(new Date(parseInt(date, 10)), "MMM dd, yyyy")}
           </p>
           <img
-            src={"https://tecdn.b-cdn.net/img/new/avatars/2.webp"}
+            src={authUser?.profilePicture}
             className='h-8 w-8 border rounded-full'
             alt=''
           />
